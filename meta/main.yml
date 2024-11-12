@@ -1,0 +1,18 @@
+galaxy_info:
+  role_name: simple_nginx_install_deb 
+  author: Aleksandr Emelyanov
+  description: Simple role for install Nginx:latest from official repo on Debian/Ubuntu
+  company: none
+  license: MIT
+  min_ansible_version: "2.9"
+  platforms:
+    - name: Ubuntu
+      versions:
+        - focal
+        - jammy
+    - name: Debian
+      versions:
+        - bullseye
+        - bookworm
+  galaxy_tags: []
+dependencies: []

@@ -1,0 +1,39 @@
+---
+- name: Install dependencies for itself
+  apt:
+    name:
+      - python3-apt
+      - apt-transport-https
+      - software-properties-common
+    state: present
+    update_cache: true
+
+- name: Add Nginx signing key
+  apt_key:
+    url: https://nginx.org/keys/nginx_signing.key
+    state: present
+
+- name: Add Nginx repository
+  apt_repository:
+    repo: "deb https://nginx.org/packages/ubuntu/ {{ ansible_distribution_release }} nginx"
+    state: present
+
+- name: Update apt cache
+  apt:
+    update_cache: true
+
+- name: Install Nginx
+  apt:
+    name: "nginx"
+    state: present
+
+- name: Ensure Nginx is started and enabled
+  systemd:
+    name: nginx
+    state: started
+    enabled: true
+
+- name: Change permissions of default access.log
+  file:
+    path: /var/log/nginx/access.log
+    mode: "0644"
